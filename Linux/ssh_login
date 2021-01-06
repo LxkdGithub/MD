@@ -1,0 +1,18 @@
+ssh密码登录需要把#PasswordAuthentication yes的注释去掉
+
+如果是root通过密码登录还要将PermitRootLogin prohibit-password(这里禁止root密码登录)
+                      改为PermitRootLogin yes
+
+
+[参考链接](https://blog.csdn.net/koastal/article/details/72426874)
+
+生成秘钥
+    ssh-keygen -y rsa/dsa 
+    可以选择秘钥存储地址(任何地方都可以一般在/home/user/.ssh/下有id_rsa id_rsa.pub known_hosts)
+    可以选择输入密码,在登录的时候输入此密码即可
+
+将公钥内容导入服务器/home/user/.ssh/authorized
+
+登录
+    ssh -l root -p port 192.168.11.1 / 
+    ssh -i /path/xxx/id_rsa root@192.168.11.1 -p port  使用秘钥登录加-i参数
